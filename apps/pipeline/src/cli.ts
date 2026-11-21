@@ -2,7 +2,7 @@
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { Pack } from '@game-learning/content';
-import { GeminiProvider, geminiKeysFromEnv } from '@game-learning/providers';
+import { GeminiProvider, geminiKeysFromEnv, type LlmProvider } from '@game-learning/providers';
 import { Command } from 'commander';
 import type { StepContext } from './context.ts';
 import { check } from './steps/check.ts';
@@ -31,11 +31,14 @@ const program = new Command()
         step === 'all' ? (Object.keys(STEPS) as StepName[]) : [assertStep(step)];
       const log = (message: string) =>
         console.log(`[${new Date().toLocaleTimeString()}] ${message}`);
-      const pack = new Pack(opts.pack);
+      // pnpm runs scripts inside the package folder; resolve the path from where the user typed it.
+      const pack = new Pack(resolve(process.env.INIT_CWD ?? process.cwd(), opts.pack));
       const ctx: StepContext = {
         pack,
         manifest: await pack.manifest(),
-        llm: new GeminiProvider({ apiKeys: geminiKeysFromEnv(), model: opts.model, log }),
+        llm: lazyLlm(
+          () => new GeminiProvider({ apiKeys: geminiKeysFromEnv(), model: opts.model, log }),
+        ),
         force: opts.force,
         log,
         ...(opts.unit ? { unit: opts.unit } : {}),
@@ -61,4 +64,18 @@ function loadEnv() {
       return;
     }
   }
+}
+
+/** Creates the AI provider on first use, so offline steps (check) work without an API key. */
+function lazyLlm(create: () => LlmProvider): LlmProvider {
+  let instance: LlmProvider | undefined;
+  const get = () => {
+    instance ??= create();
+    return instance;
+  };
+  return {
+    id: 'lazy',
+    generateText: (req) => get().generateText(req),
+    generateJson: (req) => get().generateJson(req),
+  };
 }

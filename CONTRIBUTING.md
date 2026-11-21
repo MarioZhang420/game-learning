@@ -23,6 +23,12 @@ A good free editor: **VS Code** (https://code.visualstudio.com) with the **Biome
 
 ## 2. Pick a task
 
+Every issue has a **difficulty** (`easy` → start here, `medium`, `hard`), a **priority** (`P1` is needed now, `P3` is later) and a **milestone** (the roadmap phase). See [docs/ROADMAP.md](docs/ROADMAP.md).
+
+- Never contributed before? Pick **`good first issue`** + **`difficulty: easy`**. Ones marked **`no code needed`** are content or docs.
+- Issues marked **`needs Hollow Knight`** need the game; **`maintainer`** ones need private material, so skip those.
+- **`epic`** issues are big ideas for V2/V3: join the discussion, but don't start coding them yet.
+
 Look at issues labeled **`good first issue`**. Comment "I'll take this" so two people don't do the same thing. Ask questions in the issue: there are no stupid questions.
 
 ## 3. Make the change

@@ -12,7 +12,7 @@ Goal: a structure that stays right as the project grows into many games, many su
  ┌───────────────┴──────────────── Hub (local Node service) ────────────────────┐
  │  core: sessions · scheduler (when to ask) · challenge engine · rewards ledger │
  │  plugins: mechanics · challenge types · providers (AI / TTS / STT)            │
- │  storage: progress + spaced repetition (SQLite)                               │
+ │  storage: progress + spaced repetition (JSON file)                              │
  └───────────────▲──────────────────────────────────────────────▲───────────────┘
                  │  Client API (same WebSocket style)            │ reads
  ┌───────────────┴────────────┐                    ┌─────────────┴──────────────┐
@@ -78,21 +78,21 @@ Copyright: the reworked book stays **private** (gitignored, local only). The pub
 
 ## 5. Stack (reuse first)
 
-| Need                          | Choice                                        | Why                                                                      |
-| ----------------------------- | --------------------------------------------- | ------------------------------------------------------------------------ |
-| Language (hub, app, pipeline) | TypeScript, strict                            | Largest contributor pool, one language from protocol to UI               |
-| Repo                          | pnpm workspaces + Turborepo                   | Standard monorepo, fast builds                                           |
-| Desktop / overlay             | Electron + electron-vite + React              | Transparent always-on-top windows, mic/audio, right-to-left, mature      |
-| Schemas                       | zod → JSON Schema                             | Validates messages; JSON Schema lets C#/Java integrations generate types |
-| Transport                     | WebSocket (`ws`)                              | Simple, any language has a client                                        |
-| Storage                       | SQLite (better-sqlite3) + Drizzle migrations  | Local, single file, safe schema changes                                  |
-| Spaced repetition             | `ts-fsrs` (FSRS, the algorithm Anki uses)     | Proven, no need to invent our own                                        |
-| AI                            | `@google/genai` behind our provider interface | Gemini free tier now, swappable                                          |
-| i18n                          | i18next, CSS logical properties               | Arabic + English, RTL from day one                                       |
-| Tests                         | Vitest + a game **simulator**                 | Contributors can work without owning the game                            |
-| Lint/format                   | Biome                                         | One fast tool                                                            |
-| Releases                      | Changesets + GitHub Actions                   | Versioned packages, CI on every PR                                       |
-| Hollow Knight mod             | C#, .NET Framework 4.7.2, HK Modding API      | The official modding path; hooks verified in the installed game          |
+| Need                          | Choice                                                                                        | Why                                                                      |
+| ----------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Language (hub, app, pipeline) | TypeScript, strict                                                                            | Largest contributor pool, one language from protocol to UI               |
+| Repo                          | pnpm workspaces + Turborepo                                                                   | Standard monorepo, fast builds                                           |
+| Desktop / overlay             | Electron + electron-vite + React                                                              | Transparent always-on-top windows, mic/audio, right-to-left, mature      |
+| Schemas                       | zod → JSON Schema                                                                             | Validates messages; JSON Schema lets C#/Java integrations generate types |
+| Transport                     | WebSocket (`ws`)                                                                              | Simple, any language has a client                                        |
+| Storage                       | JSON file behind `ProgressStore` (SQLite in V2, see [ADR 0005](adr/0005-progress-storage.md)) | Simple for V1; swappable                                                 |
+| Spaced repetition             | `ts-fsrs` (FSRS, the algorithm Anki uses)                                                     | Proven, no need to invent our own                                        |
+| AI                            | `@google/genai` behind our provider interface                                                 | Gemini free tier now, swappable                                          |
+| i18n                          | i18next, CSS logical properties                                                               | Arabic + English, RTL from day one                                       |
+| Tests                         | Vitest + a game **simulator**                                                                 | Contributors can work without owning the game                            |
+| Lint/format                   | Biome                                                                                         | One fast tool                                                            |
+| Releases                      | Changesets + GitHub Actions                                                                   | Versioned packages, CI on every PR                                       |
+| Hollow Knight mod             | C#, .NET Framework 4.7.2, HK Modding API                                                      | The official modding path; hooks verified in the installed game          |
 
 ## 6. Repo layout
 
@@ -116,9 +116,9 @@ content/              Private packs (gitignored) + public sample pack
 docs/                 Architecture, ADRs (decisions with reasons), protocol spec
 ```
 
-## 7. First slice (prototype)
+## 7. First slice (built)
 
-Death in Hollow Knight → mod sends `player.died` → hub's "death recovery" mechanic picks a due question (spaced repetition) → overlay shows it (Arabic, read aloud) → answer by click → feedback with the reworked explanation → XP in the companion. A Geo reward through the mod comes as step two, once the basic loop feels good.
+Death in Hollow Knight → mod sends `player.died` → hub's "death recovery" mechanic picks a due question (spaced repetition) → overlay shows it → answer by number key or click → feedback with the explanation → XP in the companion, and Geo in the game once the mod confirms it. Reading questions aloud is planned for V1 Phase 1 (see [ROADMAP.md](ROADMAP.md)). Decisions are recorded in [adr/](adr/).
 
 ## 8. Known risks
 

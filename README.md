@@ -6,8 +6,18 @@ You keep playing your game (Hollow Knight first; Minecraft, Terraria… later). 
 
 **Status:** first prototype. Hollow Knight death → question on an overlay → answer → feedback → reward.
 
-- Concept: [docs/BRIEF.md](docs/BRIEF.md)
-- Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- **Roadmap (V1 / V2 / V3 and phases):** [docs/ROADMAP.md](docs/ROADMAP.md)
+- **Want to help?** [CONTRIBUTING.md](CONTRIBUTING.md) and the [good first issues](https://github.com/Mohammed-Hashim18/game-learning/labels/good%20first%20issue)
+
+| Doc                                         | What it covers                                            |
+| ------------------------------------------- | --------------------------------------------------------- |
+| [BRIEF.md](docs/BRIEF.md)                   | The original concept                                      |
+| [ARCHITECTURE.md](docs/ARCHITECTURE.md)     | How the parts fit together                                |
+| [PROTOCOL.md](docs/PROTOCOL.md)             | How a game mod talks to the hub (for integration authors) |
+| [CONTENT-FORMAT.md](docs/CONTENT-FORMAT.md) | How study material is stored                              |
+| [IDEAS.md](docs/IDEAS.md)                   | Every idea, scored and placed in V1, V2 or V3             |
+| [PRIVACY.md](docs/PRIVACY.md)               | What stays on the PC and what is sent                     |
+| [adr/](docs/adr/)                           | Big decisions and why                                     |
 
 ## How it fits together
 
