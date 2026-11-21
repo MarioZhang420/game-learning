@@ -1,0 +1,23 @@
+{
+  "name": "@game-learning/simulator",
+  "version": "0.0.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "description": "A fake game for development and tests: sends game events to the hub from the keyboard",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "start": "tsx src/main.ts",
+    "typecheck": "tsc -p .",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@game-learning/protocol": "workspace:*",
+    "ws": "^8.23.0"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.18.2"
+  }
+}

@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Hollow Knight integration for Game Learning (a Hollow Knight Modding API mod).
+    Build:   dotnet build -c Release
+    Install: dotnet build -c Release -p:InstallMod=true   (copies into the game's Mods folder)
+    If the game is elsewhere: -p:HollowKnightManaged="D:\Games\Hollow Knight\hollow_knight_Data\Managed"
+  -->
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyName>GameLearning</AssemblyName>
+    <RootNamespace>GameLearning.HollowKnight</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <Version>0.1.0</Version>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <HollowKnightManaged Condition="'$(HollowKnightManaged)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed</HollowKnightManaged>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp" HintPath="$(HollowKnightManaged)\Assembly-CSharp.dll" Private="false" />
+    <Reference Include="MMHOOK_Assembly-CSharp" HintPath="$(HollowKnightManaged)\MMHOOK_Assembly-CSharp.dll" Private="false" />
+    <Reference Include="UnityEngine" HintPath="$(HollowKnightManaged)\UnityEngine.dll" Private="false" />
+    <Reference Include="UnityEngine.CoreModule" HintPath="$(HollowKnightManaged)\UnityEngine.CoreModule.dll" Private="false" />
+    <Reference Include="Newtonsoft.Json" HintPath="$(HollowKnightManaged)\Newtonsoft.Json.dll" Private="false" />
+  </ItemGroup>
+
+  <Target Name="InstallMod" AfterTargets="Build" Condition="'$(InstallMod)' == 'true'">
+    <MakeDir Directories="$(HollowKnightManaged)\Mods\GameLearning" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(HollowKnightManaged)\Mods\GameLearning" />
+    <Message Importance="high" Text="Installed to $(HollowKnightManaged)\Mods\GameLearning" />
+  </Target>
+</Project>

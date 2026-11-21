@@ -1,0 +1,20 @@
+{
+  "name": "@game-learning/core",
+  "version": "0.0.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "description": "Domain logic with no IO: sessions, mechanics, challenges, grading, rewards, spaced repetition",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@game-learning/content": "workspace:*",
+    "@game-learning/protocol": "workspace:*",
+    "ts-fsrs": "^6.0.0"
+  }
+}

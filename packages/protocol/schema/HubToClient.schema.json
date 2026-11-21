@@ -1,0 +1,279 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "welcome"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "sessionId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": ["type", "protocol", "sessionId"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "error"
+        },
+        "code": {
+          "type": "string",
+          "enum": ["bad-message", "unauthorized", "unsupported-protocol", "internal"]
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": ["type", "code", "message"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "state"
+        },
+        "games": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "integrationId": {
+                "type": "string"
+              },
+              "gameName": {
+                "type": "string"
+              },
+              "effects": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": ["integrationId", "gameName", "effects"],
+            "additionalProperties": false
+          }
+        },
+        "xp": {
+          "type": "number"
+        },
+        "streak": {
+          "type": "number"
+        },
+        "pack": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "questions": {
+              "type": "number"
+            }
+          },
+          "required": ["id", "title", "questions"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["type", "games", "xp", "streak"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "challenge"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "reason": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "view": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "const": "multiple-choice"
+                },
+                "prompt": {
+                  "type": "string"
+                },
+                "choices": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": ["kind", "prompt", "choices"],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "const": "true-false"
+                },
+                "prompt": {
+                  "type": "string"
+                }
+              },
+              "required": ["kind", "prompt"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "offer": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": ["xp", "effect"]
+              },
+              "name": {
+                "type": "string"
+              },
+              "amount": {
+                "type": "number"
+              }
+            },
+            "required": ["kind", "name", "amount"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["type", "id", "reason", "language", "view", "offer"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "feedback"
+        },
+        "challengeId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "correct": {
+          "type": "boolean"
+        },
+        "correctAnswer": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "const": "choice"
+                },
+                "index": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": ["kind", "index"],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "const": "boolean"
+                },
+                "value": {
+                  "type": "boolean"
+                }
+              },
+              "required": ["kind", "value"],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "explanation": {
+          "type": "string"
+        },
+        "rewards": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": ["xp", "effect"]
+              },
+              "name": {
+                "type": "string"
+              },
+              "amount": {
+                "type": "number"
+              }
+            },
+            "required": ["kind", "name", "amount"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["type", "challengeId", "correct", "correctAnswer", "explanation", "rewards"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "reward"
+        },
+        "challengeId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "name": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["applied", "rejected", "failed"]
+        }
+      },
+      "required": ["type", "challengeId", "name", "amount", "status"],
+      "additionalProperties": false
+    }
+  ]
+}

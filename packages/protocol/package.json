@@ -1,0 +1,19 @@
+{
+  "name": "@game-learning/protocol",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "description": "Wire protocol between games, the hub and user interfaces (the public contract)",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./discovery": "./src/discovery.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p .",
+    "test": "vitest run --passWithNoTests",
+    "schema": "tsx src/export-json-schema.ts"
+  },
+  "dependencies": {
+    "zod": "^4.6.7"
+  }
+}

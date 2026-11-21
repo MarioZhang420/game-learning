@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "hello"
+    },
+    "protocol": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string",
+      "const": "client"
+    },
+    "token": {
+      "type": "string"
+    },
+    "client": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": ["id", "name", "version"],
+      "additionalProperties": false
+    },
+    "language": {
+      "type": "string"
+    }
+  },
+  "required": ["type", "protocol", "role", "token", "client"],
+  "additionalProperties": false
+}

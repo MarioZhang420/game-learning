@@ -1,0 +1,26 @@
+{
+  "name": "@game-learning/hub",
+  "version": "0.0.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "description": "Local service: WebSocket gateway for games and UIs, runs the core engine",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "start": "tsx src/main.ts",
+    "typecheck": "tsc -p .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@game-learning/content": "workspace:*",
+    "@game-learning/core": "workspace:*",
+    "@game-learning/protocol": "workspace:*",
+    "ws": "^8.23.0",
+    "ts-fsrs": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.18.2"
+  }
+}

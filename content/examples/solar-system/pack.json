@@ -1,0 +1,17 @@
+{
+  "formatVersion": 1,
+  "id": "example-solar-system",
+  "title": "Example: The Solar System",
+  "language": "en",
+  "subject": "science",
+  "audience": { "grade": 4, "ageRange": "9-10" },
+  "source": { "title": "Written for this project as a sample", "pageOffset": 0 },
+  "license": "CC-BY-SA-4.0",
+  "units": [
+    {
+      "id": "u1",
+      "title": "Our Solar System",
+      "lessons": [{ "id": "u1-l1", "title": "The Sun and its planets", "pages": [1, 1] }]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+[
+  { "id": "u1-l1-f01", "unitId": "u1", "lessonId": "u1-l1", "statement": "The Sun is a star.", "kind": "fact", "pages": [1], "importance": "core" },
+  { "id": "u1-l1-f02", "unitId": "u1", "lessonId": "u1-l1", "statement": "Eight planets move around the Sun.", "kind": "fact", "pages": [1], "importance": "core" },
+  { "id": "u1-l1-f03", "unitId": "u1", "lessonId": "u1-l1", "statement": "Earth is the third planet from the Sun.", "kind": "fact", "pages": [1], "importance": "core" },
+  { "id": "u1-l1-f04", "unitId": "u1", "lessonId": "u1-l1", "statement": "Jupiter is the largest planet.", "kind": "fact", "pages": [1], "importance": "core" },
+  { "id": "u1-l1-f05", "unitId": "u1", "lessonId": "u1-l1", "statement": "The Moon moves around the Earth.", "kind": "fact", "pages": [1], "importance": "core" },
+  { "id": "u1-l1-f06", "unitId": "u1", "lessonId": "u1-l1", "statement": "Mercury is the planet closest to the Sun.", "kind": "fact", "pages": [1], "importance": "supporting" }
+]

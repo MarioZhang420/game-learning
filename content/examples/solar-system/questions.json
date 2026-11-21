@@ -1,0 +1,8 @@
+[
+  { "id": "u1-l1-q01", "type": "true-false", "factIds": ["u1-l1-f01"], "prompt": "The Sun is a star.", "answer": true, "explanation": "Yes! The Sun is a star, the closest one to us.", "difficulty": 1 },
+  { "id": "u1-l1-q02", "type": "multiple-choice", "factIds": ["u1-l1-f02"], "prompt": "How many planets move around the Sun?", "choices": ["Six", "Eight", "Ten", "Twelve"], "answerIndex": 1, "explanation": "Eight planets move around the Sun.", "difficulty": 1 },
+  { "id": "u1-l1-q03", "type": "multiple-choice", "factIds": ["u1-l1-f03"], "prompt": "Which planet is third from the Sun?", "choices": ["Mars", "Venus", "Earth", "Jupiter"], "answerIndex": 2, "explanation": "Earth, our home, is the third planet from the Sun.", "difficulty": 1 },
+  { "id": "u1-l1-q04", "type": "multiple-choice", "factIds": ["u1-l1-f04"], "prompt": "Which is the largest planet?", "choices": ["Earth", "Jupiter", "Mercury", "Mars"], "answerIndex": 1, "explanation": "Jupiter is the largest planet.", "difficulty": 2 },
+  { "id": "u1-l1-q05", "type": "true-false", "factIds": ["u1-l1-f05"], "prompt": "The Moon moves around the Sun, not the Earth.", "answer": false, "explanation": "The Moon moves around the Earth.", "difficulty": 2 },
+  { "id": "u1-l1-q06", "type": "multiple-choice", "factIds": ["u1-l1-f06"], "prompt": "Which planet is closest to the Sun?", "choices": ["Mercury", "Neptune", "Earth"], "answerIndex": 0, "explanation": "Mercury is the closest planet to the Sun.", "difficulty": 2 }
+]
